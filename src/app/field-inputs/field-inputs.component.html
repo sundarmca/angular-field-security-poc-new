@@ -1,0 +1,9 @@
+<div class="col-lg-12">
+<hr />
+<p class="form-title">{{ formTitle }}</p>
+<form>
+  <ng-container *ngFor="let val of resultset">
+    <app-input label="{{val.label}}" [results]="checkDisp(val.inputval, val.property)" [readonlyattr]="checkAccess(val.property)"></app-input>
+  </ng-container>
+</form>
+</div>

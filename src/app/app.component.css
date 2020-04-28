@@ -1,0 +1,14 @@
+p {
+  font-size: 14px;
+}
+
+span {
+  font-size: 12px;
+  color: #3b5998;
+}
+
+.desc{
+  margin: 5px 0px 5px 0px;
+  color: #9b6954;
+  font-size: 12px;
+}

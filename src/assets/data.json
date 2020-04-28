@@ -1,0 +1,31 @@
+{
+  "searchdata": [
+    {
+      "label": "Name (Readonly mode)",
+      "label2": "Name",
+      "name": "testuser1",
+      "team": "Development",
+      "project": "Project-A",
+      "inputval": "testuser",
+      "property": "read"
+    },
+    {
+      "label": "Team (Write mode)",
+      "label2": "Team",
+      "name": "testuser2",
+      "team": "Deployment",
+      "project": "Project-B",
+      "inputval": "Development",
+      "property": "write"
+    },
+    {
+      "label": "Project (Protected mode)",
+      "label2": "Project",
+      "name": "testuser3",
+      "team": "QA",
+      "project": "Project-C",
+      "inputval": "life sciences",
+      "property": "protected"
+    }
+  ]
+}
