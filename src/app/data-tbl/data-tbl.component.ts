@@ -44,9 +44,7 @@ export class DataTblComponent implements OnInit {
           }
         });
         this.results = data.searchdata;
-          console.log(":::::::");
-          console.log(this.results);
-          console.log(":::::::");
+        console.log(this.results);
     });
   }
 
