@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
 })
 export class DataTblComponent implements OnInit {
   results = [];
+  checks = [];
 
   formTitle = 'JSON response loaded to Data Table';
   constructor(private dtable: ForminputService) { 
@@ -24,8 +25,24 @@ export class DataTblComponent implements OnInit {
 
   getDataItems(): void {
     this.fetchFromService()
-    .subscribe((data: any): void => { 
+    .subscribe((data: any): void => {
+        this.checks = data.searchdata;
+        data.searchdata.forEach((elem) => {
+          if (this.protectAccess(elem.property)) {
+             elem.name = this.maskElem(elem.name);
+             elem.team = this.maskElem(elem.team);
+             elem.project = this.maskElem(elem.project);
+             elem['editable']= false;
+          } else if (this.readAccess(elem.property)) {
+            elem['editable']= false;
+          } else {
+             elem['editable']= true;
+          }
+        });
         this.results = data.searchdata;
+          console.log(":::::::");
+          console.log(this.results);
+          console.log(":::::::");
     });
   }
 
@@ -35,17 +52,19 @@ export class DataTblComponent implements OnInit {
   onEditCancel():void {
   }
 
-  checkAccess(attr: any) {
-    if (attr === 'read' || attr === 'protected') {
+  protectAccess(attr: any) {
+    if (attr === 'protected') {
       return true;
     }
   }
 
-  checkDisp(val: any, prop = null) {
-    if (prop === 'protected') {
-      return "*".repeat(val.length)
-    } else {
-      return val;
+  readAccess(attr: any) {
+    if (attr === 'read') {
+      return true;
     }
+  }
+
+  maskElem(val: any) {
+      return "*".repeat(val.length);
   }
 }

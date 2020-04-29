@@ -9,43 +9,46 @@
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-result>
-          <tr>        
-            <td [pEditableColumn] [ngClass]="{'disable-td' : checkAccess(result.property)}" >
-              <div *ngIf="checkAccess(result.property)">
-                {{ checkDisp(result.name, result.property) }}
+          <tr>
+            <td [pEditableColumn] [ngClass]="{'disable-td' : !result.editable}">
+              <td [pEditableColumn] >
+              <div *ngIf="!result.editable">
+                {{ result.name }}
               </div>
-              <p-cellEditor>
-                <ng-template pTemplate="input" *ngIf="!checkAccess(result.property)">
+              <p-cellEditor *ngIf="result.editable">
+                <ng-template pTemplate="input">
                   <input pInputText type="text" [(ngModel)]="result.name" required>
                 </ng-template>
-                <ng-template pTemplate="output" *ngIf="!checkAccess(result.property)">
-                  {{ checkDisp(result.name, result.property) }}
+                <ng-template pTemplate="output">
+                 {{ result.name }}
                 </ng-template>
               </p-cellEditor>
             </td>
-            <td [pEditableColumn] [ngClass]="{'disable-td' : checkAccess(result.property)}">
-              <div *ngIf="checkAccess(result.property)">
-                {{ checkDisp(result.team, result.property) }}
+            <td [pEditableColumn] [ngClass]="{'disable-td' : !result.editable}">
+              <td [pEditableColumn] >
+              <div *ngIf="!result.editable">
+                {{ result.team }}
               </div>
-              <p-cellEditor>
-                  <ng-template pTemplate="input" *ngIf="!checkAccess(result.property)">
+              <p-cellEditor *ngIf="result.editable">
+                  <ng-template pTemplate="input">
                     <input pInputText type="text" [(ngModel)]="result.team" required>
                   </ng-template>
-                <ng-template pTemplate="output" *ngIf="!checkAccess(result.property)">
-                  {{ checkDisp(result.team, result.property) }}
+                <ng-template pTemplate="output">
+                  {{ result.team }}
                 </ng-template>
               </p-cellEditor>
             </td>
-            <td [pEditableColumn] [ngClass]="{'disable-td' : checkAccess(result.property)}">
-              <div *ngIf="checkAccess(result.property)">
-                {{ checkDisp(result.project, result.property) }}
+            <td [pEditableColumn] [ngClass]="{'disable-td' : !result.editable}">
+              <td [pEditableColumn] >
+              <div *ngIf="!result.editable">
+                {{ result.project }}
               </div>
-              <p-cellEditor>
-                <ng-template pTemplate="input" *ngIf="!checkAccess(result.property)">
+              <p-cellEditor *ngIf="result.editable">
+                <ng-template pTemplate="input">
                   <input pInputText type="text" [(ngModel)]="result.project" required>
                 </ng-template>
-                <ng-template pTemplate="output" *ngIf="!checkAccess(result.property)">
-                  {{ checkDisp(result.project, result.property) }}
+                <ng-template pTemplate="output">
+                  {{ result.project }}
                 </ng-template>
               </p-cellEditor>
             </td>
