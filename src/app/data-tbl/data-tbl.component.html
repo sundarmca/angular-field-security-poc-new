@@ -2,54 +2,25 @@
   <hr />
     <p class="form-title">{{ formTitle }}</p>
     <div class="col-lg-12">
-      <p-table [value]="results" (onEditInit)="onEditInit($event)" (onEditCancel)="onEditCancel($event)">
-        <ng-template pTemplate="header">
+      <p-table [value]="results" (onEditInit)="onEditInit($event)" (onEditCancel)="onEditCancel($event)" [columns]="cols">
+        <ng-template pTemplate="header" let-columns>
           <tr>
-            <th *ngFor="let res of results">{{ res.label2 }}</th>
+            <th *ngFor="let col of columns">{{ col.header }}</th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-result>
+        <ng-template pTemplate="body" let-rowData let-result let-columns="columns">
           <tr>
-            <td [pEditableColumn] [ngClass]="{'disable-td' : !result.editable}">
-              <td [pEditableColumn] >
-              <div *ngIf="!result.editable">
-                {{ result.name }}
+            <td *ngFor="let col of columns; let i = index" [pEditableColumn] [ngClass]="{'disable-td' : !col.editable}" >
+              <div *ngIf="!col.editable">
+               {{ rowData[col.field] }}
               </div>
-              <p-cellEditor *ngIf="result.editable">
-                <ng-template pTemplate="input">
-                  <input pInputText type="text" [(ngModel)]="result.name" required>
-                </ng-template>
-                <ng-template pTemplate="output">
-                 {{ result.name }}
-                </ng-template>
-              </p-cellEditor>
-            </td>
-            <td [pEditableColumn] [ngClass]="{'disable-td' : !result.editable}">
-              <td [pEditableColumn] >
-              <div *ngIf="!result.editable">
-                {{ result.team }}
-              </div>
-              <p-cellEditor *ngIf="result.editable">
-                  <ng-template pTemplate="input">
-                    <input pInputText type="text" [(ngModel)]="result.team" required>
-                  </ng-template>
-                <ng-template pTemplate="output">
-                  {{ result.team }}
-                </ng-template>
-              </p-cellEditor>
-            </td>
-            <td [pEditableColumn] [ngClass]="{'disable-td' : !result.editable}">
-              <td [pEditableColumn] >
-              <div *ngIf="!result.editable">
-                {{ result.project }}
-              </div>
-              <p-cellEditor *ngIf="result.editable">
-                <ng-template pTemplate="input">
-                  <input pInputText type="text" [(ngModel)]="result.project" required>
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{ result.project }}
-                </ng-template>
+              <p-cellEditor *ngIf="col.editable">
+                      <ng-template pTemplate="input">
+                          <input pInputText type="text" [(ngModel)]="rowData[col.field]" required>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                         {{ rowData[col.field] }}
+                      </ng-template>
               </p-cellEditor>
             </td>
           </tr>

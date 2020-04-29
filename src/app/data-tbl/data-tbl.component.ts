@@ -9,10 +9,15 @@ import { map } from 'rxjs/operators';
 })
 export class DataTblComponent implements OnInit {
   results = [];
-  checks = [];
+  cols = [];
 
   formTitle = 'JSON response loaded to Data Table';
   constructor(private dtable: ForminputService) { 
+    this.cols = [
+        { header: "Name", field: "name" },
+        { header: "Team", field: "team" },
+        { header: "Project", field: "project" }
+    ];
   }
 
   ngOnInit() {
@@ -23,10 +28,11 @@ export class DataTblComponent implements OnInit {
     return this.dtable.getData();
   }
 
+
+
   getDataItems(): void {
     this.fetchFromService()
     .subscribe((data: any): void => {
-        this.checks = data.searchdata;
         data.searchdata.forEach((elem) => {
           if (this.protectAccess(elem.property)) {
              elem.name = this.maskElem(elem.name);
