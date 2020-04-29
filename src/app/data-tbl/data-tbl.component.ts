@@ -28,8 +28,6 @@ export class DataTblComponent implements OnInit {
     return this.dtable.getData();
   }
 
-
-
   getDataItems(): void {
     this.fetchFromService()
     .subscribe((data: any): void => {

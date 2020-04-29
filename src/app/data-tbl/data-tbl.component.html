@@ -2,24 +2,24 @@
   <hr />
     <p class="form-title">{{ formTitle }}</p>
     <div class="col-lg-12">
-      <p-table [value]="results" (onEditInit)="onEditInit($event)" (onEditCancel)="onEditCancel($event)" [columns]="cols">
+      <p-table [value]="results" (onEditInit)="onEditInit($event)" (onEditCancel)="onEditCancel($event)"[columns]="cols">
         <ng-template pTemplate="header" let-columns>
           <tr>
             <th *ngFor="let col of columns">{{ col.header }}</th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-rowData let-result let-columns="columns">
+        <ng-template pTemplate="body" let-result let-columns="columns">
           <tr>
-            <td *ngFor="let col of columns; let i = index" [pEditableColumn] [ngClass]="{'disable-td' : !col.editable}" >
-              <div *ngIf="!col.editable">
-               {{ rowData[col.field] }}
+            <td *ngFor="let col of columns" [pEditableColumn] [ngClass]="{'disable-td' : !result.editable}" >
+              <div *ngIf="!result.editable">
+               {{ result[col.field] }}
               </div>
-              <p-cellEditor *ngIf="col.editable">
+              <p-cellEditor *ngIf="result.editable">
                       <ng-template pTemplate="input">
-                          <input pInputText type="text" [(ngModel)]="rowData[col.field]" required>
+                          <input pInputText type="text" [(ngModel)]="result[col.field]" required> 
                       </ng-template>
                       <ng-template pTemplate="output">
-                         {{ rowData[col.field] }}
+                         {{ result[col.field] }}
                       </ng-template>
               </p-cellEditor>
             </td>
